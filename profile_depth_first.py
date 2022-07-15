@@ -1,7 +1,7 @@
 import molecular_assembly as ma
 import pandas as pd
 
-TIMEOUT = 10
+TIMEOUT = 200
 SAVENAME = "Depth_First_Times_200s_2022_07_14.csv"
 
 
@@ -10,7 +10,7 @@ def main():
     source_df = pd.read_csv("Sample_Benchmark_3-26.csv")
     inchis = list(source_df["InChI"])
     all_data = []
-    for inchi in inchis[50:55]:
+    for inchi in inchis:
         checked_inchi = ma.check_inchi_c(inchi, strict=False)
         ma_run = ma.get_depth_first(checked_inchi, timeout=TIMEOUT)
         save_data = {"MA": ma_run["MA"],

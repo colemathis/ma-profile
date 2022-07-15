@@ -1,7 +1,7 @@
 import molecular_assembly as ma
 import pandas as pd
 
-TIMEOUT = 10
+TIMEOUT = 200
 SAVENAME = "Exact_Go_Times_200s_2022_07_14.csv"
 
 
@@ -10,7 +10,7 @@ def main():
     source_df = pd.read_csv("Sample_Benchmark_3-26.csv")
     inchis = list(source_df["InChI"])
     all_data = []
-    for inchi in inchis[:5]:
+    for inchi in inchis:
         checked_inchi, valid = ma.check_inchi(inchi, strict=False)
         ma_run = ma.get_exact_go(checked_inchi, timeout=TIMEOUT)
         saved_data = {"MA": ma_run["MA"],

@@ -2,7 +2,7 @@ import molecular_assembly as ma
 import pandas as pd
 
 SAVENAME = "Monte_Carlo_Times_200s_2022_07_14.csv"
-TIMEOUT = 10
+TIMEOUT = 200
 MIN_MA = 14
 FIRST_STEPS = [1000, 10000, 100000]
 SECOND_STEPS = [100, 500, 1000, int(1e6)]
@@ -17,7 +17,7 @@ def main():
 
     for nstep1 in FIRST_STEPS:
         for nstep2 in SECOND_STEPS:
-            for inchi in inchis[:2]:
+            for inchi in inchis:
                 checked_inchi = ma.check_inchi_c(inchi, strict=False)
                 ma_run = ma.get_monte_carlo(checked_inchi,
                                             Nstep1=nstep1,
