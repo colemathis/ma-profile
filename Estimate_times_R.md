@@ -56,7 +56,7 @@ ggplot(clean_go_times) + geom_point(aes(x = log(subgraphs), y = log(time))) +
 
 
     
-![png](figs/output_10_0.png)
+![png](output_10_0.png)
     
 
 
@@ -193,6 +193,15 @@ confidence_coef[2,"n_carbon"]
 0.667432333054222
 
 
+
+```R
+confidence_coef[2,"(Intercept)"]
+```
+
+
+-14.974954311357
+
+
 # So we can use the formula below to bound the time required to compute the MA
 $n_{sg} $ - Number of subgraphs 
 
@@ -202,9 +211,8 @@ $n_C$ - Number of Carbon Atoms
 
 $t_{MA}$ - Time to compute the MA
 
-$ \log(t_{MA}) \approx 1.283 log(n_{sg}) + 0.244 n_{ub} + 0.668 n_C $
+$ \log(t_{MA}) \approx 1.283 log(n_{sg}) + 0.244 n_{ub} + 0.668 n_C - 14.975$
 
-$ t_{MA} \approx n_{sg}^{1.283} * \exp( 0.244 n_{ub} + 0.668 n_C)$
 
 Let's just check the MA prediction while we're here
 
@@ -259,7 +267,7 @@ ggplot(clean_go_times) + geom_point(aes(x = MA, y = pred.MA)) + geom_abline()
 
 
     
-![png](figs/output_27_0.png)
+![png](figs/output_28_0.png)
     
 
 
@@ -274,30 +282,14 @@ mean(abs(clean_go_times$MA - clean_go_times$pred.MA)/clean_go_times$MA)
 
 
 ```R
-plot(all_model_MA)
+ggplot(clean_go_times) + 
+    geom_histogram(aes(x = abs(pred.MA - MA)), binwidth = 1) + 
+    labs(x = "Error", y = "Count")
 ```
 
 
     
-![png](output_29_0.png)
-    
-
-
-
-    
-![png](output_29_1.png)
-    
-
-
-
-    
-![png](output_29_2.png)
-    
-
-
-
-    
-![png](output_29_3.png)
+![png](figs/output_30_0.png)
     
 
 
